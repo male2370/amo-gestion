@@ -30,10 +30,10 @@ AMO.utils = (() => {
   /** Para escribir en un campo: 1250000 → "1.250.000", 0.35 → "0,35", vacío → "" */
   const toField = n => (n === '' || n === null || n === undefined) ? '' : nfNumber.format(parseNum(n));
   function moneyShort(n) {
-    const x = parseNum(n), a = Math.abs(x);
-    if (a >= 1e6) return '$' + (x / 1e6).toFixed(1).replace('.', ',').replace(',0', '') + ' M';
-    if (a >= 1e3) return '$' + Math.round(x / 1e3) + ' mil';
-    return '$' + Math.round(x);
+    const x = parseNum(n), a = Math.abs(x), s = x < 0 ? '-' : '';
+    if (a >= 1e6) return s + '$' + (a / 1e6).toFixed(1).replace('.', ',').replace(',0', '') + ' M';
+    if (a >= 1e3) return s + '$' + Math.round(a / 1e3) + ' mil';
+    return s + '$' + Math.round(a);
   }
   const pct = (n, digits = 0) => Number.isFinite(n) ? (n * 100).toFixed(digits).replace('.', ',') + '%' : '–';
   const sum = (arr, f = x => x) => (arr || []).reduce((a, x) => a + parseNum(f(x)), 0);

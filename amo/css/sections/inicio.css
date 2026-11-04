@@ -31,3 +31,23 @@
 .r-ev-d small{font-size:10.5px;text-transform:uppercase;color:var(--muted);font-weight:700}
 .r-plan{text-align:center;margin-top:6px}
 @media(max-width:640px){.r-er-res b{font-size:24px}.r-big{font-size:28px}}
+
+/* ---------- Vista del año ---------- */
+.r-head{flex-wrap:wrap;gap:10px 14px}
+.a-kpis .v{font-size:clamp(16px,1.45vw,21px);white-space:nowrap}
+.a-tabla td:first-child{font-weight:600}
+.a-tabla tr.a-fut td{color:var(--line)}
+.a-tabla tr.a-vacio td{color:var(--muted);font-style:italic}
+.a-tabla td b{font-weight:700}
+.a-tabla .sh{display:none}
+.legend .a-dot{background:var(--surface)!important;border:2.5px solid var(--good);box-sizing:border-box}
+@media(max-width:640px){
+  .r-head .seg{order:-1;width:100%;justify-content:center}
+  .r-head .seg-b{flex:1}
+  .r-hoy{display:none}
+  .a-kpis .v{font-size:17px}
+  .a-tabla{font-size:13px}
+  .a-tabla td,.a-tabla th{padding:9px 4px}
+  .a-tabla .a-mg,.a-tabla .lg{display:none}
+  .a-tabla .sh{display:inline}
+}

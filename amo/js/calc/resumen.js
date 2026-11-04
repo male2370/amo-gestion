@@ -96,5 +96,57 @@ AMO.calc.resumen = (() => {
     return { ingresos, costos };
   }
 
-  return { mes, historial, variacion, avisos, estado };
+  /**
+   * El año entero, mes por mes. Los meses que todavía no llegaron y los que
+   * no tienen nada cargado (ni caja, ni gastos, ni eventos) no suman: así un
+   * sueldo calculado solo, en un mes sin ventas, no ensucia el total.
+   * Compara con los mismos meses del año anterior.
+   */
+  function anio(d, y, hoy) {
+    const hasta = String(hoy).slice(0, 7);
+    const meses = [];
+    for (let i = 1; i <= 12; i++) {
+      const ym = `${y}-${String(i).padStart(2, '0')}`;
+      if (ym > hasta) { meses.push({ ym, futuro: true, conDatos: false }); continue; }
+      const m = mes(d, ym, hoy);
+      const conDatos = m.caja.diasAbiertos > 0 || m.gastos.items.length > 0 || m.eventos.activos > 0;
+      meses.push({ ym, futuro: false, conDatos, m, ventas: m.ventas, costos: m.costos, resultado: m.resultado, margen: m.margen, cubiertos: m.cubiertos, cajaTotal: m.caja.total, salon: m.salon });
+    }
+    const con = meses.filter(x => x.conDatos);
+    const ventas = sum(con, x => x.ventas), costos = sum(con, x => x.costos), resultado = ventas - costos;
+    const cubiertos = sum(con, x => x.cubiertos), salon = sum(con, x => x.salon);
+
+    // Ingresos y costos del año, sumando el estado de resultados de cada mes.
+    const juntar = filas => {
+      const t = new Map();
+      filas.forEach(([l, v, c]) => { const a = t.get(l) || [l, 0, c]; a[1] += n(v); t.set(l, a); });
+      return [...t.values()];
+    };
+    const estados = con.map(x => estado(x.m));
+    const ingresos = juntar(estados.flatMap(e => e.ingresos));
+    const costosCat = juntar(estados.flatMap(e => e.costos)).filter(r => r[1] > 0).sort((a, b) => b[1] - a[1]);
+
+    const orden = con.slice().sort((a, b) => b.resultado - a.resultado);
+
+    // Mismos meses del año anterior (si este año va hasta octubre, se compara enero–octubre).
+    const ultimo = con.length ? con[con.length - 1].ym.slice(5) : '12';
+    let antV = 0, antR = 0, antMeses = 0;
+    for (let i = 1; i <= Number(ultimo); i++) {
+      const ym = `${y - 1}-${String(i).padStart(2, '0')}`;
+      const m = mes(d, ym, hoy);
+      if (m.caja.diasAbiertos > 0 || m.gastos.items.length > 0 || m.eventos.activos > 0) { antV += m.ventas; antR += m.resultado; antMeses++; }
+    }
+
+    return {
+      y, meses, mesesConDatos: con.length,
+      ventas, costos, resultado, margen: ratio(resultado, ventas),
+      cubiertos, ticket: ratio(salon, cubiertos),
+      promedio: con.length ? resultado / con.length : 0,
+      mejor: orden[0] || null, peor: orden.length > 1 ? orden[orden.length - 1] : null,
+      ingresos, costosCat,
+      anterior: antMeses ? { ventas: antV, resultado: antR, meses: antMeses, hasta: ultimo } : null
+    };
+  }
+
+  return { mes, historial, variacion, avisos, estado, anio };
 })();
