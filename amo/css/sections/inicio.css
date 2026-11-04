@@ -51,3 +51,6 @@
   .a-tabla .a-mg,.a-tabla .lg{display:none}
   .a-tabla .sh{display:inline}
 }
+
+.r-bajar{display:inline-flex;gap:6px}
+.r-bajar .btn{display:inline-flex;align-items:center;gap:5px}

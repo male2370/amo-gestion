@@ -148,3 +148,26 @@ tfoot td{font-weight:700;border-bottom:0}
 .login-card{width:min(360px,100%);display:grid;gap:12px;margin-top:18px}
 .login-card .btn{justify-content:center}
 .login-error{color:var(--bad);font-size:13.5px;font-weight:600}
+
+/* ---------- Impresión / PDF ----------
+   Al imprimir (o "Guardar como PDF") queda solo el contenido, en claro,
+   sin menú ni botones, y las tarjetas no se cortan entre páginas. */
+.print-only{display:none}
+@media print{
+  @page{margin:12mm}
+  :root,:root[data-theme],:root:not([data-theme="light"]){
+    --bg:#ffffff!important;--surface:#ffffff!important;--ink:#0e1a16!important;--muted:#5b6862!important;--line:#dcd3c4!important;
+    --accent:#0f4a33!important;--accent-ink:#f6f2ea!important;--accent-soft:#dde8df!important;--gold:#a8854a!important;
+    --good:#23794b!important;--bad:#a3362a!important;--warn:#8d620f!important;--neutral-soft:#efebe4!important;color-scheme:light}
+  html,body{background:#fff!important}
+  header.top,.tabs,#toast,.btn,.icon-btn,.link-btn,.seg,.r-avisos,.r-plan,.r-bajar{display:none!important}
+  .print-only{display:block!important}
+  .r-print{font-size:11px;color:var(--muted);margin:0 0 6px;text-transform:uppercase;letter-spacing:.08em;font-weight:700}
+  main{padding:0!important;max-width:none!important}
+  .card,.kpi,tr{break-inside:avoid}
+  .card,.kpi{box-shadow:none!important}
+  .kpis{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  .kpi .v{font-size:17px!important;white-space:nowrap}
+  .kpi.hero{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .r-er-row.bar i,.r-chart svg,.stack-bar{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}

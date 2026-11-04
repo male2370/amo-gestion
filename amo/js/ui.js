@@ -19,7 +19,8 @@ AMO.ui = (() => {
     ajustes: '<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M2 12h3M19 12h3M4.9 19.1 7 17M17 7l2.1-2.1"/>',
     prev: '<path d="M15 18l-6-6 6-6"/>', next: '<path d="M9 18l6-6-6-6"/>',
     close: '<path d="M18 6 6 18M6 6l12 12"/>', plus: '<path d="M12 5v14M5 12h14"/>',
-    check: '<path d="M5 12.5 10 17l9-10"/>', dot: '<circle cx="12" cy="12" r="4"/>'
+    check: '<path d="M5 12.5 10 17l9-10"/>', dot: '<circle cx="12" cy="12" r="4"/>',
+    download: '<path d="M12 4v11M7 10l5 5 5-5M5 20h14"/>', print: '<path d="M7 9V3h10v6M7 17H4v-7h16v7h-3M7 14h10v7H7z"/>'
   };
   const icon = (name, size = 18) => `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${PATHS[name] || ''}</svg>`;
 

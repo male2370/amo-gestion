@@ -10,7 +10,7 @@
    ===================================================================== */
 (() => {
   const U = AMO.utils, R = AMO.calc.resumen, store = AMO.store, app = AMO.app;
-  const { esc, money, moneyShort, pct, today, ymOf, addMonths, monthOnly, monthShort, integer, longDate, parseDate } = U;
+  const { esc, money, moneyShort, pct, today, ymOf, addMonths, monthOnly, monthShort, monthName, integer, longDate, parseDate } = U;
   const { icon, kpi, empty, chip } = AMO.ui;
   const COLS = ['caja', 'gastos', 'personal', 'sueldos', 'eventos', 'vinos', 'vinoMov', 'platos', 'insumos', 'config'];
 
@@ -177,9 +177,29 @@
   }
   const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
   function cabecera(nav, derecha) {
-    return `<section class="page-head r-head">
+    return `<p class="print-only r-print">AMO · ${S.vista === 'anio' ? `Resumen del año ${S.anio}` : `Resumen de ${monthName(S.ym)}`} · generado el ${today().split('-').reverse().join('/')}</p>
+    <section class="page-head r-head">
       <div class="seg" role="tablist"><button role="tab" class="seg-b" data-act="vista" data-v="mes" aria-selected="${S.vista === 'mes'}">Mes</button><button role="tab" class="seg-b" data-act="vista" data-v="anio" aria-selected="${S.vista === 'anio'}">Año</button></div>
-      ${nav}<span class="spacer"></span>${derecha}</section>`;
+      ${nav}<span class="spacer"></span>${derecha}
+      <span class="r-bajar"><button class="btn small" data-act="excel" title="Bajar en Excel">${icon('download', 15)} Excel</button><button class="btn small" data-act="pdf" title="Guardar en PDF o imprimir">${icon('print', 15)} PDF</button></span></section>`;
+  }
+
+  /* ---------- Exportar ---------- */
+  function bajarExcel() {
+    const d = datos(), X = AMO.calc.exportar;
+    const hojas = S.vista === 'anio' ? X.libroAnio(d, S.anio, today()) : X.libroMes(d, S.ym, today());
+    const nombre = S.vista === 'anio' ? `AMO ${S.anio}.xlsx` : `AMO ${monthName(S.ym)}.xlsx`;
+    AMO.xlsx.descargar(AMO.xlsx.crear(hojas), nombre);
+    AMO.ui.toast('Excel descargado');
+  }
+  function guardarPdf() {
+    // El nombre del PDF sale del título de la página.
+    const antes = document.title;
+    document.title = S.vista === 'anio' ? `AMO ${S.anio}` : `AMO ${monthName(S.ym)}`;
+    const volver = () => { document.title = antes; window.removeEventListener('afterprint', volver); };
+    window.addEventListener('afterprint', volver);
+    window.print();
+    setTimeout(volver, 3000);
   }
 
   /* ---------- Sección ---------- */
@@ -222,6 +242,8 @@
       if (act === 'anio-prev' || act === 'anio-next') { S.anio += act === 'anio-prev' ? -1 : 1; return app.render(); }
       if (act === 'hoy') { S.ym = ymOf(today()); S.anio = Number(today().slice(0, 4)); return app.render(); }
       if (act === 'vista') { S.vista = el.dataset.v; if (S.vista === 'anio') S.anio = Number(S.ym.slice(0, 4)); return app.render(); }
+      if (act === 'excel') return bajarExcel();
+      if (act === 'pdf') return guardarPdf();
       if (act === 'ver-mes') { S.ym = el.dataset.ym; S.vista = 'mes'; app.render(); return window.scrollTo({ top: 0, behavior: 'smooth' }); }
     }
   });
