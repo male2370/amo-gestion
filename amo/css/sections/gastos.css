@@ -1,0 +1,20 @@
+/* =====================================================================
+   AMO Gestión · css/sections/gastos.css
+   Formulario de carga, lista del mes y barras por categoría.
+   ===================================================================== */
+.g-form.editing{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.g-opts{display:flex;flex-wrap:wrap;align-items:center;gap:12px 22px;margin-top:14px}
+.g-vence{max-width:190px;grid-template-columns:auto 1fr;align-items:center;gap:8px}
+.g-vence > span{white-space:nowrap}
+.g-actions{margin-top:14px}
+.g-filtros{display:grid;grid-template-columns:minmax(0,1fr) 240px;gap:10px;align-items:start;margin-bottom:10px}
+.g-tabla td{padding-top:10px;padding-bottom:10px}
+.g-dia{white-space:nowrap;color:var(--muted);width:64px}
+.cat-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:1px}
+.g-bar{grid-template-columns:minmax(0,1fr) auto;row-gap:5px}
+.g-bar .track{grid-column:1 / -1}
+.g-split{margin-top:12px}
+@media(max-width:760px){
+  .g-filtros{grid-template-columns:1fr}
+  .g-actions .btn.primary{flex:1;justify-content:center}
+}

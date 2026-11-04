@@ -1,0 +1,33 @@
+/* =====================================================================
+   AMO Gestión · css/sections/inicio.css
+   Resumen: avisos, estado de resultados, equilibrio, gráfico y tarjetas.
+   ===================================================================== */
+.r-aviso-list{display:grid;gap:6px}
+.r-aviso{display:grid;grid-template-columns:8px minmax(0,1fr) auto 18px;gap:12px;align-items:center;width:100%;text-align:left;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer;color:var(--ink)}
+.r-aviso:hover{border-color:var(--muted)}
+.r-aviso i{width:8px;height:8px;border-radius:50%;background:var(--muted)}
+.r-aviso.t-bad i{background:var(--bad)} .r-aviso.t-warn i{background:var(--gold)} .r-aviso.t-neutral i{background:var(--accent)}
+.r-aviso.t-bad span{color:var(--bad);font-weight:600}
+.r-aviso svg{color:var(--muted)}
+.r-vacio{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.r-er{display:grid;gap:2px;font-size:14px}
+.r-er-h{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.r-er-h b{color:var(--ink);font-size:15px;letter-spacing:0}
+.r-er-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;padding:6px 0}
+.r-er-row.bar i{grid-column:1 / -1;height:6px;border-radius:3px;display:block;opacity:.85}
+.r-er-res{display:flex;justify-content:space-between;align-items:baseline;margin-top:10px;padding-top:12px;border-top:2px solid var(--ink);font-weight:700}
+.r-er-res b{font-family:var(--display);font-weight:400;font-size:30px}
+.r-big{font-family:var(--display);font-size:34px;line-height:1.1;margin-bottom:6px}
+.r-chart svg{width:100%;height:auto;display:block}
+.r-mini{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.r-mini div{display:grid;gap:2px}
+.r-mini b{font-size:18px}
+.r-ev{display:grid;gap:8px}
+.r-ev-row{display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;align-items:center}
+.r-ev-row > span:last-child{display:grid;gap:2px}
+.r-ev-row small{font-size:12.5px}
+.r-ev-d{display:grid;justify-items:center;line-height:1.1;border-right:1px solid var(--line);padding-right:8px}
+.r-ev-d b{font-family:var(--display);font-weight:400;font-size:22px}
+.r-ev-d small{font-size:10.5px;text-transform:uppercase;color:var(--muted);font-weight:700}
+.r-plan{text-align:center;margin-top:6px}
+@media(max-width:640px){.r-er-res b{font-size:24px}.r-big{font-size:28px}}

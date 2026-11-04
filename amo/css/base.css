@@ -1,0 +1,77 @@
+/* =====================================================================
+   AMO Gestión · base.css
+   Paleta (de la referencia "Emerald Residence"): porcelana, travertino,
+   esmeralda y tinta de bosque, con un detalle dorado. Tema claro y oscuro.
+   Layout: encabezado con menú (abajo en celular), una columna de trabajo.
+   ===================================================================== */
+:root{
+  --bg:#efebe4;            /* porcelana */
+  --surface:#fbf9f5;
+  --ink:#0e1a16;           /* tinta de bosque */
+  --muted:#5b6862;
+  --line:#dcd3c4;          /* travertino */
+  --stone:#d9cbb3;
+  --accent:#0f4a33;        /* esmeralda */
+  --accent-ink:#f6f2ea;
+  --accent-soft:#dde8df;
+  --gold:#a8854a;
+  --good:#23794b; --good-soft:#dcefe2;
+  --warn:#8d620f; --warn-soft:#f4e9d2;
+  --bad:#a3362a;  --bad-soft:#f6e1dc;
+  --neutral-soft:#e7e1d6;
+  --display:"Bodoni Moda", "Didot", Georgia, serif;
+  --body:"Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --r:12px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0b1411; --surface:#12201b; --ink:#eee8dd; --muted:#9aa79f; --line:#22352d; --stone:#3a4a42;
+    --accent:#5cb98c; --accent-ink:#06120d; --accent-soft:#173a2c; --gold:#c9a76a;
+    --good:#6ccb94; --good-soft:#163526; --warn:#e0b45a; --warn-soft:#352a12; --bad:#f08a7c; --bad-soft:#3b1d19;
+    --neutral-soft:#1b2b25; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0b1411; --surface:#12201b; --ink:#eee8dd; --muted:#9aa79f; --line:#22352d; --stone:#3a4a42;
+  --accent:#5cb98c; --accent-ink:#06120d; --accent-soft:#173a2c; --gold:#c9a76a;
+  --good:#6ccb94; --good-soft:#163526; --warn:#e0b45a; --warn-soft:#352a12; --bad:#f08a7c; --bad-soft:#3b1d19;
+  --neutral-soft:#1b2b25; color-scheme: dark;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.45;-webkit-text-size-adjust:100%}
+body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+@media(min-width:900px){body{padding-bottom:32px}}
+button,input,select,textarea{font:inherit;color:inherit}
+h1,h2,h3{margin:0;text-wrap:balance;font-weight:inherit}
+p{margin:0}
+.num{font-variant-numeric:tabular-nums}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+
+/* ---------- Encabezado y menú ---------- */
+.top{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.top-in{max-width:1180px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:14px}
+.brand{display:grid;line-height:1;min-width:0}
+.brand b{font-family:var(--display);font-weight:400;font-size:30px;letter-spacing:.12em;color:var(--accent)}
+.brand small{font-size:11px;color:var(--muted);margin-top:5px;letter-spacing:.03em;white-space:nowrap}
+.tabs{display:flex;gap:2px;margin-left:auto}
+.tab{position:relative;border:0;background:none;padding:8px 12px;border-radius:999px;cursor:pointer;color:var(--muted);font-weight:600;display:flex;align-items:center;gap:6px;white-space:nowrap}
+.tab:hover{color:var(--ink)}
+.tab[aria-current="true"]{background:var(--accent);color:var(--accent-ink)}
+.tab-dot{position:absolute;top:6px;right:6px;width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.tab[aria-current="true"] .tab-dot{background:var(--accent-ink)}
+.gear{border:1px solid var(--line);background:var(--surface);border-radius:999px;width:38px;height:38px;display:grid;place-items:center;cursor:pointer;color:var(--muted);flex:none}
+.gear[aria-current="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+@media(max-width:899px){
+  .tabs{position:fixed;left:0;right:0;bottom:0;margin:0;background:var(--surface);border-top:1px solid var(--line);padding:6px 4px calc(6px + env(safe-area-inset-bottom));justify-content:space-around;z-index:30}
+  .tab{flex-direction:column;gap:3px;font-size:10px;padding:6px 2px;border-radius:10px;flex:1;min-width:0}
+  .tab span{max-width:100%;overflow:hidden;text-overflow:ellipsis}
+  .tab[aria-current="true"]{background:var(--accent-soft);color:var(--accent)}
+  .tab[aria-current="true"] .tab-dot{background:var(--gold)}
+  .tab-dot{top:4px;right:calc(50% - 16px)}
+  .gear{margin-left:auto}
+}
+
+main{max-width:1180px;margin:0 auto;padding:18px 16px;display:grid;gap:16px}

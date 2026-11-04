@@ -1,0 +1,41 @@
+/* =====================================================================
+   AMO Gestión · css/sections/personal.css
+   Filas de sueldos, adelantos y tarjetas del equipo.
+   ===================================================================== */
+.p-head,.p-row{display:grid;grid-template-columns:minmax(0,1.6fr) 110px minmax(0,1fr) minmax(0,1fr) 130px 120px 56px;gap:8px;align-items:center}
+.p-head{font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding-bottom:6px;border-bottom:1px solid var(--line)}
+.p-list{display:grid}
+.p-row{padding:10px 0;border-bottom:1px solid var(--line)}
+.p-row.is-paid .p-who b{color:var(--muted)}
+.p-who{display:grid;gap:2px;min-width:0}
+.p-who small{font-size:12.5px}
+.p-na{font-size:13px;padding-left:2px}
+.p-row .cell.r{text-align:right;display:grid;gap:2px}
+.p-row .cell small{font-size:11.5px;min-height:1em}
+.p-ok{justify-items:end}
+.p-foot{display:grid;grid-template-columns:minmax(0,1fr) 130px 120px 56px;gap:8px;padding-top:10px;font-weight:700;text-align:right}
+.p-foot span{text-align:left}
+.p-foot::after{content:""}
+.p-adel-form{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,1fr) auto;margin-bottom:12px}
+.p-team{display:grid;gap:8px}
+.p-card{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer}
+.p-card:hover{border-color:var(--muted)}
+.p-card-txt{display:grid;gap:1px;flex:1;min-width:0}
+.p-card-txt small{font-size:12.5px}
+.p-avatar{width:36px;height:36px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-family:var(--display);font-size:18px;flex:none}
+.p-edit{border:1px solid var(--accent);border-radius:10px;padding:12px;background:var(--surface);box-shadow:inset 0 0 0 1px var(--accent)}
+@media(max-width:860px){
+  .p-head{display:none}
+  .p-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 10px;padding:12px;border:1px solid var(--line);border-radius:10px;margin-bottom:8px;background:var(--bg)}
+  .p-row input{background:var(--surface)}
+  .p-who{grid-column:1 / -1}
+  .p-row .cl{display:block}
+  .p-row .cell.r{text-align:left}
+  .p-ok{justify-items:start;grid-template-columns:auto auto;align-items:center;gap:8px}
+  .p-foot{grid-template-columns:1fr auto auto;gap:14px}
+  .p-foot::after{display:none}
+  .p-adel-form{grid-template-columns:1fr 1fr}
+  .p-adel-btn{grid-column:1 / -1}
+  .p-adel-btn > span{display:none}
+  .p-adel-btn .btn{justify-content:center}
+}

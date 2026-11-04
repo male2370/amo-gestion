@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AMO Gestión</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/sections/caja.css">
+<link rel="stylesheet" href="css/sections/gastos.css">
+<link rel="stylesheet" href="css/sections/personal.css">
+<link rel="stylesheet" href="css/sections/eventos.css">
+<link rel="stylesheet" href="css/sections/carta.css">
+<link rel="stylesheet" href="css/sections/vinoteca.css">
+<link rel="stylesheet" href="css/sections/inicio.css">
+<link rel="stylesheet" href="css/sections/ajustes.css">
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <div class="brand"><b>AMO</b><small id="status" role="status">Conectando…</small></div>
+    <nav class="tabs" id="tabs" aria-label="Secciones"></nav>
+    <button class="gear" id="gear" data-nav="ajustes" aria-label="Ajustes"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M2 12h3M19 12h3M4.9 19.1 7 17M17 7l2.1-2.1"/></svg></button>
+  </div>
+</header>
+<main id="main" aria-live="polite"></main>
+<div class="toast" id="toast" role="status"></div>
+
+<!-- Núcleo (el orden importa) -->
+<script src="js/utils.js"></script>
+<script src="js/store.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/app.js"></script>
+<!-- Cálculos (sin pantalla, con pruebas) -->
+<script src="js/calc/caja.js"></script>
+<script src="js/calc/gastos.js"></script>
+<script src="js/calc/personal.js"></script>
+<script src="js/calc/eventos.js"></script>
+<script src="js/calc/carta.js"></script>
+<script src="js/calc/vinoteca.js"></script>
+<script src="js/calc/resumen.js"></script>
+<script src="js/calc/ejemplo.js"></script>
+<!-- Secciones terminadas: se agregan acá, una por una -->
+<script src="js/sections/caja.js"></script>
+<script src="js/sections/gastos.js"></script>
+<script src="js/sections/personal.js"></script>
+<script src="js/sections/eventos.js"></script>
+<script src="js/sections/carta.js"></script>
+<script src="js/sections/vinoteca.js"></script>
+<script src="js/sections/inicio.js"></script>
+<script src="js/sections/ajustes.js"></script>
+
+<!-- Plan de obra (página fuera del menú) -->
+<script src="js/sections/plan.js"></script>
+<script>AMO.app.start();</script>
+</body>
+</html>
